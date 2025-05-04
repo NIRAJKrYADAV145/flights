@@ -1,7 +1,7 @@
 // here we can use class but we are moving forward through function.
 
 
-const { StatusCodes } = require('http-status-codes');
+const { StatusCodes, INTERNAL_SERVER_ERROR } = require('http-status-codes');
 const { AirplaneRepository } = require('../repositories');
 const AppError = require('../utils/errors/app-errors');
 
@@ -20,10 +20,23 @@ async function createAirplane(data) {
          });
          throw new AppError(explanation, StatusCodes.BAD_REQUEST);
       }
-      throw new AppError('Cannot create a new Airplane object', StatusCodes);
+      throw new AppError('Cannot create a new Airplane object', StatusCodes.INTERNAL_SERVER_ERROR);
+   }
+}
+
+// this function is going to fetch all the available airplanes;
+async function getAirplanes(){
+   try {
+      const airplanes = await airplaneRepository.getAll();
+      return airplanes;
+   } catch (error) {
+      throw new AppError('Cannot  fetch data of the airplanes' ,StatusCodes.INTERNAL_SERVER_ERROR);
+  
+      
    }
 }
 
 module.exports = {
-   createAirplane
+   createAirplane,
+   getAirplanes
 }

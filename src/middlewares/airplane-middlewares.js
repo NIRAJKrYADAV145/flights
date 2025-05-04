@@ -4,7 +4,7 @@ const{ErrorResponse} =require('../utils/common');
 const AppError = require('../utils/errors/app-errors');
  
 
-function validsteCreateRequest(req,res,next){
+function validateCreateRequest(req,res,next){
     if(!req.body.modelNumber){
         ErrorResponse.message= 'Something went wrong while creating airplane ';
         ErrorResponse.error= 
@@ -18,5 +18,5 @@ function validsteCreateRequest(req,res,next){
 }
 
 module.exports= {
-    validsteCreateRequest
+    validateCreateRequest
 }
